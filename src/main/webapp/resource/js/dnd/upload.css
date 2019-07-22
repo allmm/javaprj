@@ -1,0 +1,64 @@
+.d-none{
+    display: none;
+}
+
+#upload{
+    width: auto;
+}
+
+#upload .box{
+    display: flex;
+
+    box-sizing: border-box;
+    height: 300px;
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid gray;
+}
+
+#upload .drop-zone {
+    width: 600px;
+    height: 100%;
+    border-right: 1px solid gray;
+    background: lightblue;
+}
+
+#upload .drop-zone .file-selector{
+	margin-left: auto;
+    margin-right: auto;
+    width:50%;
+    height:50%;
+    background: red;
+    border-radius: 20px;
+    
+    color:white;
+    line-height:150px;	
+}	
+
+#upload .drop-zone.valide{
+    background: lightgreen;
+}
+
+#upload .drop-zone.invalide{
+    background: red;
+}
+
+#upload .drop-zone .progress-box{
+width: 300px;
+height: 20px;
+background: lightskyblue;
+border: 1px solid gray;
+}    
+
+#upload .drop-zone .progress{
+    width: 0%;
+    height: 100%;
+    background: lightpink;
+ 
+    }    
+
+#upload .file-list{
+    background: yellow;
+}
+

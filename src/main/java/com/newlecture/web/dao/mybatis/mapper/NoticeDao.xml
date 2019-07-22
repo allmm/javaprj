@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newlecture.web.dao.NoticeDao">
+ 
+ 	<resultMap id="noticeMap" type="com.newlecture.web.entity.Notice">
+ 		<result column="id" property="id" jdbcType="NUMERIC" javaType="Integer"/>
+ 		<result column="title" property="title" jdbcType="NVARCHAR" javaType="String"/>
+ 		<result column="content" property="content" jdbcType="CLOB" javaType="String"/>
+ 		<result column="writer_id" property="writerId" jdbcType="VARCHAR" javaType="String"/>
+ 		<result column="regdate" property="regDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+ 		<result column="hit" property="hit" jdbcType="NUMERIC" javaType="Integer"/>
+ 	</resultMap>
+ 
+ 
+ 	<select id="get" resultMap="noticeMap">
+		select * from notice where id = #{id}  <!-- 하나만 쓰는경우에는 변수명 그대로 쓸 수 있다. -->
+	</select> 
+	
+ 	<select id="getList" resultType="com.newlecture.web.entity.Noticeview">
+		SELECT * FROM NOTICE_VIEW  
+		WHERE ${param2} LIKE '%${param3}%' 
+		
+		<if test="param1 != null">
+			AND NUM BETWEEN 1+(#{param1}-1)*10 AND #{param1}*10
+		</if>
+	
+	</select> 
+	
+	<insert id="insert" parameterType="com.newlecture.web.entity.Notice">
+		<selectKey order="BEFORE" keyProperty="id" resultType="Integer">
+			select NVL(id,0)+1 from (select * from notice order by regdate desc) where rownum = 1
+		</selectKey>
+		
+		insert into notice(id, title, content, writer_id) values(#{id},#{title},#{content},#{writerId})
+	</insert>
+	
+	<update id="update" parameterType="com.newlecture.web.entity.Notice">
+		update notice set title= #{title}, content=#{content}, WRITER_ID=#{writerId}, hit=#{hit}, regDate=#{regdate}  where id=#{id}
+	</update>
+	
+	
+	
+</mapper>
